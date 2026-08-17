@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- maximum-scale=1, user-scalable=no — отключает iOS auto-zoom на input focus
+         (страница не «прыгает» когда появляется клавиатура) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+    <!-- Favicon (вкладка браузера) -->
+    <link rel="icon" type="image/svg+xml" href="/onecort-demo/favicon.svg" />
+    
+    
+
+    <!-- iOS · «Добавить на главный экран» — иконка 180×180 для retina -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/onecort-demo/apple-touch-icon-180.png" />
+    <link rel="apple-touch-icon" href="/onecort-demo/apple-touch-icon-180.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="ONECORT" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- PWA manifest подбирается синхронно по hostname:
+         onecort.ru → coach.webmanifest (отдельная PWA на отдельном поддомене)
+         /coach путь на app.* → coach.webmanifest тоже
+         остальное → manifest.webmanifest. Должно произойти ДО React, чтобы iOS Safari
+         при «Добавить на экран Домой» прочитал правильный start_url. -->
+    <script>
+      (function () {
+        var isCoachHost = location.hostname.indexOf('coach.') === 0
+        var isCoachPath = location.pathname.indexOf('/coach') === 0
+        var isCoach = isCoachHost || isCoachPath
+        var link = document.createElement('link')
+        link.rel = 'manifest'
+        link.href = isCoach ? '/onecort-demo/coach.webmanifest' : '/onecort-demo/manifest.webmanifest'
+        document.head.appendChild(link)
+        if (isCoach) {
+          var titleMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]')
+          if (titleMeta) titleMeta.setAttribute('content', 'ONECORT · Тренер')
+          var themeMeta = document.querySelector('meta[name="theme-color"]')
+          if (themeMeta) themeMeta.setAttribute('content', '#0a2456')
+          // Подменим apple-touch-icon на тренерскую — тёмно-синюю с лого
+          var oldTouch = document.querySelectorAll('link[rel="apple-touch-icon"]')
+          oldTouch.forEach(function (l) { l.parentNode.removeChild(l) })
+          var newTouch = document.createElement('link')
+          newTouch.rel = 'apple-touch-icon'
+          newTouch.setAttribute('sizes', '180x180')
+          newTouch.href = '/onecort-demo/coach-apple-touch-icon-180.png'
+          document.head.appendChild(newTouch)
+        }
+      })()
+    </script>
+
+    <!-- Цвет адресной строки -->
+    <meta name="theme-color" content="#1448A3" />
+
+    <!-- SEO / превью при шере ссылки -->
+    <title>ONECORT · Бронирование корта</title>
+    <meta name="description" content="ONECORT — CRM для падел-клуба: онлайн-бронирование, касса, аналитика. Демо-версия. 4 корта, тренировки с тренером, абонементы." />
+    <meta property="og:title" content="ONECORT · Бронирование корта" />
+    <meta property="og:description" content="Забронируй падел-корт онлайн за 3 тапа. Тренировки, абонементы, семейный корт." />
+    <meta property="og:image" content="/onecort-demo/onecort-logo.svg" />
+    <meta property="og:type" content="website" />
+    <script type="module" crossorigin src="/onecort-demo/assets/index-leTt2vJr.js"></script>
+    <link rel="stylesheet" crossorigin href="/onecort-demo/assets/index-B8IOWK6Y.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

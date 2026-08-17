@@ -1,0 +1,25 @@
+{
+  "name": "POUND 4 PADEL",
+  "short_name": "P4P",
+  "description": "Падел-клуб № 1 в Приморске — бронирование, абонементы, друзья",
+  "start_url": "/me",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1448A3",
+  "theme_color": "#1448A3",
+  "icons": [
+    {
+      "src": "/onecort-demo/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/onecort-demo/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
